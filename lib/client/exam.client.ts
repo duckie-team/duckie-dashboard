@@ -37,7 +37,7 @@ export interface RequestParameters {
     auth?: string;
 }
 
-export class Client {
+export class ExamAPIClient {
     private _auth?: string;
     private prefixUrl: string;
     private timeoutMs: number;
