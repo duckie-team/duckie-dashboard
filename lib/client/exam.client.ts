@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { ExamAPI } from "./endpoints";
 import {
     APIResponseError,
     buildRequestError,
@@ -7,6 +8,7 @@ import {
     RequestTimeoutError,
     UnknownHTTPResponseError,
 } from "./error";
+import { Endpoint } from "./types/endpoint";
 import { pick } from "./utils";
 export {
     APIResponseError,
@@ -36,24 +38,24 @@ export interface RequestParameters {
 }
 
 export class Client {
-    private auth?: string;
+    private _auth?: string;
     private prefixUrl: string;
     private timeoutMs: number;
 
     public constructor(options?: ClientOptions) {
-        this.auth = options?.auth;
+        this._auth = options?.auth;
         this.prefixUrl =
             options?.baseUrl ?? "https://api-calendar2notion.opize.me";
         this.timeoutMs = options?.timeoutMs ?? 60_000;
     }
 
     public updateAuth(auth?: string) {
-        this.auth = auth;
+        this._auth = auth;
     }
 
     private authAsHeaders(auth?: string): Record<string, string> {
         const headers: Record<string, string> = {};
-        const authHeaderValue = auth ?? this.auth;
+        const authHeaderValue = auth ?? this._auth;
         if (authHeaderValue !== undefined) {
             headers["authorization"] = `Bearer ${authHeaderValue}`;
         }
@@ -93,4 +95,62 @@ export class Client {
             throw error;
         }
     }
+
+    private requestBuilder<
+        Parameter extends Record<string, any>,
+        Response extends Record<string, any>
+    >(endpoint: Endpoint<Parameter, Response>) {
+        return (args: WithAuth<Parameter>): Promise<Response> => {
+            return this.request<Response>({
+                path: endpoint.path(args),
+                method: endpoint.method,
+                query: pick(args, endpoint.queryParams as any),
+                body: pick(args, endpoint.bodyParams as any),
+                auth: args?.auth,
+            });
+        };
+    }
+
+    public readonly user = {
+        get: this.requestBuilder(ExamAPI.Users.GetUser),
+        patch: this.requestBuilder(ExamAPI.Users.PatchUser),
+    };
+
+    public readonly terms = {
+        post: this.requestBuilder(ExamAPI.Terms.PostTerms),
+        get: this.requestBuilder(ExamAPI.Terms.GetTerms),
+    };
+
+    public readonly tags = {
+        post: this.requestBuilder(ExamAPI.Tags.PostTag),
+    };
+
+    public readonly hello = {
+        get: this.requestBuilder(ExamAPI.Hello.GetHello),
+    };
+
+    public readonly exams = {
+        post: this.requestBuilder(ExamAPI.Exams.PostExam),
+        get: this.requestBuilder(ExamAPI.Exams.getExam),
+    };
+
+    public readonly examInstance = {
+        post: this.requestBuilder(ExamAPI.ExamInstance.PostExamInstance),
+        submit: this.requestBuilder(
+            ExamAPI.ExamInstance.PostExamInstanceSubmit
+        ),
+    };
+
+    public readonly devices = {
+        post: this.requestBuilder(ExamAPI.Devices.PostExamDevice),
+    };
+
+    public readonly categories = {
+        list: this.requestBuilder(ExamAPI.Categories.GetExamCategories),
+    };
+
+    public readonly auth = {
+        kakaoLogin: this.requestBuilder(ExamAPI.Auth.PostAuthKakao),
+        getToken: this.requestBuilder(ExamAPI.Auth.GetAuthToken),
+    };
 }
