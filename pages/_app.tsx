@@ -1,6 +1,5 @@
 import { OpizeWrapper } from "opize-design-system";
 import type { AppProps } from "next/app";
-import Link from "next/link";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Flip, ToastContainer } from "react-toastify";
@@ -8,7 +7,6 @@ import { Flip, ToastContainer } from "react-toastify";
 import "../styles/globals.css";
 import "opize-design-system/dist/style/font.css";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
 import Head from "next/head";
 
 const queryClient = new QueryClient();
@@ -25,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <OpizeWrapper>
+            <OpizeWrapper initLink={"a"}>
                 <QueryClientProvider client={queryClient}>
                     <Component {...pageProps} />
                     <ReactQueryDevtools initialIsOpen={true} />
