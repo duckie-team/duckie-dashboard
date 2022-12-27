@@ -5,5 +5,5 @@ export const examClient = new ExamAPIClient({
     auth:
         typeof window === "undefined"
             ? ""
-            : localStorage.getItem("duckieExamAuthToken") || "",
+            : localStorage.getItem("duckieExamToken") || "",
 });

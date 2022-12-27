@@ -5,27 +5,36 @@ import { toast } from "react-toastify";
 import { examClient } from "../lib/client/client";
 import { APIResponseError } from "../lib/client/error";
 
-export function useUser({
-    allowNonLogin = false,
-}: { allowNonLogin?: boolean } = {}) {
+let userId: number;
+if (typeof window !== undefined) {
+    try {
+        const base64Payload =
+            localStorage.getItem("duckieExamToken")?.split(".")[1] || "";
+        const payload = Buffer.from(base64Payload, "base64");
+        const result = JSON.parse(payload.toString());
+        userId = result.userId;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+export function useUser({ roles }: { roles?: string[] } = {}) {
     const { data: user, error } = useQuery(
         ["user", "self"],
         () =>
             examClient.user.get({
-                id: 0,
+                id: userId,
             }),
         {}
     );
     const router = useRouter();
 
-    useEffect(() => {
-        const token = localStorage.getItem("opizeToken");
-        if (!token && !allowNonLogin) {
-            toast.warn("로그인이 필요해요");
-            router.push("/auth/login");
-            return;
+    if (roles && user) {
+        if (roles.every((role) => user.permission.every((p) => p !== role))) {
+            toast.warn("페이지에 접근할 수 있는 권한이 없어요.");
+            router.push("/");
         }
-    }, [allowNonLogin, router]);
+    }
 
     if (error && error instanceof APIResponseError) {
         return {

@@ -43,15 +43,8 @@ export default function Home() {
                         code: query.code as string,
                     });
                     router.push("/auth/login");
+                    localStorage.setItem("duckieExamToken", res.accessToken);
                     examClient.updateAuth(res.accessToken);
-
-                    const tokenRes = await examClient.auth.getToken({});
-                    console.log(tokenRes);
-
-                    const userRes = await examClient.user.get({
-                        id: tokenRes.userId,
-                    });
-                    console.log(userRes);
 
                     toast.info("로그인에 성공했어요.");
                     router.push("/dashboard");
