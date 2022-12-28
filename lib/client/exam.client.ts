@@ -70,7 +70,12 @@ export class ExamAPIClient {
         auth,
     }: RequestParameters): Promise<ResponseBody> {
         const url = `${this.prefixUrl}${path}`;
-        const headers: Record<string, string> = this.authAsHeaders(auth);
+        const headers: Record<string, string> = {
+            ...this.authAsHeaders(auth),
+            "x-duckie-device-name": navigator.userAgent,
+            "x-duckie-version": "web",
+            "x-duckie-client": "web",
+        };
 
         try {
             const response = await RequestTimeoutError.rejectAfterTimeout(
