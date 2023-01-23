@@ -137,6 +137,10 @@ export class ExamAPIClient {
     public readonly exams = {
         post: this.requestBuilder(ExamAPI.Exams.PostExam),
         get: this.requestBuilder(ExamAPI.Exams.getExam),
+        list: this.requestBuilder(ExamAPI.Exams.getExams),
+        thumbnail: {
+            post: this.requestBuilder(ExamAPI.Exams.PostExamThumbnail),
+        },
     };
 
     public readonly examInstance = {

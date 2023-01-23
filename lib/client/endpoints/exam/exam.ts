@@ -7,7 +7,7 @@ export const PostExam: Endpoint<PostExamParameter, PostExamResponse> = {
     path: () => `/exams`,
     method: "post",
     bodyParams: [
-        "buttonText",
+        "buttonTitle",
         "categoryId",
         "certifyingStatement",
         "description",
@@ -15,9 +15,8 @@ export const PostExam: Endpoint<PostExamParameter, PostExamResponse> = {
         "mainTagId",
         "problems",
         "subTagIds",
-        "thumbnailType",
+        "thumbnailUrl",
         "title",
-        "thumbnailImageUrl",
     ],
     pathParams: [],
     queryParams: [],
@@ -38,3 +37,46 @@ export const getExam: Endpoint<getExamParameter, getExamResponse> = {
     queryParams: [],
 };
 export type getExamResponse = ExamObject;
+
+// GET /exams
+export type GetExamsParameter = {};
+export const getExams: Endpoint<GetExamsParameter, GetExamsResponse> = {
+    path: () => `/exams`,
+    method: "get",
+    bodyParams: [],
+    pathParams: [],
+    queryParams: [],
+};
+export type GetExamsResponse = {
+    exams: ExamObject[];
+};
+
+// POST /exams/thumbnail
+export type PostExamThumbnailParameter = {
+    title: string;
+    mainTag: string;
+    category: string;
+    nickName: string;
+    certifyingStatement: string;
+    type: "text" | "image";
+};
+export const PostExamThumbnail: Endpoint<
+    PostExamThumbnailParameter,
+    PostExamThumbnailResponse
+> = {
+    path: () => `/exams/thumbnail`,
+    method: "post",
+    bodyParams: [
+        "category",
+        "certifyingStatement",
+        "mainTag",
+        "nickName",
+        "title",
+        "type",
+    ],
+    pathParams: [],
+    queryParams: [],
+};
+export type PostExamThumbnailResponse = {
+    url: string;
+};

@@ -45,8 +45,6 @@ export default function Home() {
                     router.push("/auth/login");
                     localStorage.setItem("duckieExamToken", res.accessToken);
                     examClient.updateAuth(res.accessToken);
-
-                    toast.info("로그인에 성공했어요.");
                     router.push("/dashboard");
                 } catch (err) {
                     if (err instanceof APIResponseError) {

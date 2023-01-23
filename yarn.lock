@@ -7040,10 +7040,10 @@ open@^8.0.9, open@^8.4.0:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
-opize-design-system@^0.16.4:
-  version "0.16.4"
-  resolved "https://registry.yarnpkg.com/opize-design-system/-/opize-design-system-0.16.4.tgz#e682f30cc9d0f491bd029ce746f5679213f1b121"
-  integrity sha512-17mHbcIGOWAjoKBI5/pn2FWC78St3aWX2ZG+54ZfKzkZdiLOOyhfMEa07r41+Un9DTUVwl0ZjZSeOCGlUL+xEA==
+opize-design-system@0.18.5:
+  version "0.18.5"
+  resolved "https://registry.yarnpkg.com/opize-design-system/-/opize-design-system-0.18.5.tgz#43a57f65759fb8684ecb2634f1d22c32a79b4e74"
+  integrity sha512-c5jgWdTbCItDuDGGQNJHps9Irf9dlSIqZzC5Vbx7rJdP5N+gStVsIP8dXYu/UIheP7QnM89EiUndgBgXh+xqUQ==
   dependencies:
     "@testing-library/jest-dom" "^5.14.1"
     "@testing-library/react" "^13.0.0"
@@ -8050,6 +8050,11 @@ react-hook-form@^7.34.0:
   version "7.41.0"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.41.0.tgz#cc0871f4784e7233ac8466300da557d622154414"
   integrity sha512-u1cHOXujr+AsNBoeCtcCuRwPh87mXAgKtXqd3qTCBgNFYzVZLXjYgLcynORpAgqhe24r5scucR8+6gfWaXBtHQ==
+
+react-hook-form@^7.42.1:
+  version "7.42.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.42.1.tgz#c6396ca684716d89abc1c7e64343badfd30c56c6"
+  integrity sha512-2UIGqwMZksd5HS55crTT1ATLTr0rAI4jS7yVuqTaoRVDhY2Qc4IyjskCmpnmdYqUNOYFy04vW253tb2JRVh+IQ==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

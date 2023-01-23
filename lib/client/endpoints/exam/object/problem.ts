@@ -41,7 +41,6 @@ export type AnswerObject =
     | ImageChoiceAnsWerObject;
 export type ShortAnswerAnswerObject = {
     type: "shortAnswer";
-    shortAnswer: string;
 };
 export type ChoiceAnswerObject = {
     type: "choice";

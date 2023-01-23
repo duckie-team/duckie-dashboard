@@ -9,27 +9,22 @@ export type CreateExamObject = {
     certifyingStatement: string;
     problems: CreateProblemObject[];
     isPublic: boolean;
-    buttonText: string;
+    buttonTitle: string;
     answerRate: number;
-    thumbnailUrl?: string;
     solvedCount: number;
-    thumbnailImageUrl?: string;
-} & (
-    | { thumbnailImageUrl: string; thumbnailType: "default" }
-    | {
-          thumbnailType: "image";
-      }
-);
+    thumbnailUrl: string;
+};
 
 export type ExamObject = {
+    id: number;
     title: string;
     description: string;
     certifyingStatement: string;
     problems: CreateProblemObject[];
-    buttonText: string;
+    buttonTitle: string;
     answerRate: number;
     solvedCount: number;
-    thumbnailImageUrl?: string;
+    thumbnailUrl?: string;
     category: {
         name: string;
         id: number;
