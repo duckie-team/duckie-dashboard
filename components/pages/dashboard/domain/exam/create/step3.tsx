@@ -67,6 +67,7 @@ export function CreateStep3() {
             subTagIds: data.subTagIds?.join(","),
             thumbnailUrl: data.thumbnailUrl,
         },
+        reValidateMode: "onChange",
     });
 
     const generateImage = async () => {

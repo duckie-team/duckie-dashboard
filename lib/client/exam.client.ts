@@ -35,6 +35,7 @@ export interface RequestParameters {
     query?: QueryParams;
     body?: Record<string, unknown>;
     auth?: string;
+    contentType?: string;
 }
 
 export class ExamAPIClient {
@@ -68,6 +69,7 @@ export class ExamAPIClient {
         query,
         body,
         auth,
+        contentType = "application/json",
     }: RequestParameters): Promise<ResponseBody> {
         const url = `${this.prefixUrl}${path}`;
         const headers: Record<string, string> = {
@@ -75,6 +77,7 @@ export class ExamAPIClient {
             "x-duckie-device-name": navigator.userAgent,
             "x-duckie-version": "web",
             "x-duckie-client": "web",
+            "Content-Type": contentType,
         };
 
         try {
@@ -112,6 +115,7 @@ export class ExamAPIClient {
                 query: pick(args, endpoint.queryParams as any),
                 body: pick(args, endpoint.bodyParams as any),
                 auth: args?.auth,
+                contentType: endpoint.contentType,
             });
         };
     }
@@ -161,5 +165,9 @@ export class ExamAPIClient {
     public readonly auth = {
         kakaoLogin: this.requestBuilder(ExamAPI.Auth.PostAuthKakao),
         getToken: this.requestBuilder(ExamAPI.Auth.GetAuthToken),
+    };
+
+    public readonly file = {
+        post: this.requestBuilder(ExamAPI.Files.PostFile),
     };
 }

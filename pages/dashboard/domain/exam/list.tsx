@@ -36,7 +36,6 @@ export default function Dashboard() {
             <ExamDomainHeader now="list" />
             {exams?.length !== 0 ? (
                 <BoxLayout minHeight="calc(100vh - 220px)">
-                    (
                     <ItemsTable>
                         {exams?.map((exam) => (
                             <ItemsTable.Row key={exam.id}>
@@ -47,7 +46,6 @@ export default function Dashboard() {
                             </ItemsTable.Row>
                         ))}
                     </ItemsTable>
-                    )
                 </BoxLayout>
             ) : (
                 <CenterLayout minHeight="calc(100vh - 220px)">

@@ -9,4 +9,5 @@ export type Endpoint<
     pathParams: (keyof Parameter)[];
     queryParams: (keyof Parameter)[];
     bodyParams: (keyof Parameter)[];
+    contentType?: string;
 };
