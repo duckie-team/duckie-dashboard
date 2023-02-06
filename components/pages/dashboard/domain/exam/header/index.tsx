@@ -16,7 +16,7 @@ const A = styled(Link)`
     margin-bottom: -6px;
 `;
 
-type Menu = "index" | "list" | "create";
+type Menu = "index" | "list" | "create" | "recommendation";
 export function ExamDomainHeader({ now }: { now: Menu }) {
     const router = useRouter();
     const { user } = useUser();
@@ -60,6 +60,13 @@ export function ExamDomainHeader({ now }: { now: Menu }) {
                         onClick: () =>
                             router.push("/dashboard/domain/exam/create"),
                         text: "생성",
+                    },
+                    recommendation: {
+                        onClick: () =>
+                            router.push(
+                                "/dashboard/domain/exam/recommendation"
+                            ),
+                        text: "추천",
                     },
                 }}
                 selected={now}

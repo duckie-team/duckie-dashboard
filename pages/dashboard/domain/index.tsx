@@ -31,7 +31,7 @@ export default function DomainDashboard() {
     return (
         <>
             <DashboardHeader now="domain" />
-            <BoxLayout minHeight="calc(100vh - 220px)">
+            <BoxLayout minHeight="calc(100vh - 220px)" marginTop="8px">
                 <ItemsTable>
                     {Domains.map((domain) => (
                         <ItemsTable.Row key={domain.name}>

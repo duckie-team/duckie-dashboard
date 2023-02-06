@@ -19,7 +19,11 @@ if (typeof window !== undefined) {
 }
 
 export function useUser({ roles }: { roles?: string[] } = {}) {
-    const { data: user, error } = useQuery(
+    const {
+        data: user,
+        error,
+        isLoading,
+    } = useQuery(
         ["user", "self"],
         () =>
             examClient.user.get({
@@ -30,7 +34,7 @@ export function useUser({ roles }: { roles?: string[] } = {}) {
     const router = useRouter();
 
     if (roles && user) {
-        if (roles.every((role) => user.permission.every((p) => p !== role))) {
+        if (roles.every((role) => user.permissions.every((p) => p !== role))) {
             toast.warn("페이지에 접근할 수 있는 권한이 없어요.");
             router.push("/");
         }
@@ -41,6 +45,7 @@ export function useUser({ roles }: { roles?: string[] } = {}) {
             user: null,
             isError: true,
             error: error,
+            isLoading,
         };
     }
 
@@ -48,5 +53,6 @@ export function useUser({ roles }: { roles?: string[] } = {}) {
         user,
         isError: false,
         error: undefined,
+        isLoading,
     };
 }

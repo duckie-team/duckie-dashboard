@@ -11,5 +11,5 @@ export type UserObject = {
         name: string;
         id: number;
     }[];
-    permission: string[];
+    permissions: string[];
 };

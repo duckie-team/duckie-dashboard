@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { ExamDomainHeader } from "../../../../components/pages/dashboard/domain/exam/header";
 import { DashboardHeader } from "../../../../components/pages/dashboard/header";
 import { IndexFooter } from "../../../../components/pages/index/index";
+import { ExamItem, ExamItemGrid } from "../../../../components/share/exam/item";
 import { useUser } from "../../../../hook/useUser";
 import { examClient } from "../../../../lib/client/client";
 import { ExamAPI } from "../../../../lib/client/endpoints";
@@ -35,17 +36,20 @@ export default function Dashboard() {
         <>
             <ExamDomainHeader now="list" />
             {exams?.length !== 0 ? (
-                <BoxLayout minHeight="calc(100vh - 220px)">
-                    <ItemsTable>
+                <BoxLayout minHeight="calc(100vh - 220px)" marginTop="8px">
+                    <ExamItemGrid>
+                        {/* <ItemsTable> */}
                         {exams?.map((exam) => (
-                            <ItemsTable.Row key={exam.id}>
-                                <ItemsTable.Row.Text
-                                    text={`${exam.id}. ${exam.title}`}
-                                    subText={exam.description}
-                                />
-                            </ItemsTable.Row>
+                            // <ItemsTable.Row key={exam.id}>
+                            //     <ItemsTable.Row.Text
+                            //         text={`${exam.id}. ${exam.title}`}
+                            //         subText={exam.description}
+                            //     />
+                            // </ItemsTable.Row>
+                            <ExamItem exam={exam} key={exam.id} />
                         ))}
-                    </ItemsTable>
+                        {/* </ItemsTable> */}
+                    </ExamItemGrid>
                 </BoxLayout>
             ) : (
                 <CenterLayout minHeight="calc(100vh - 220px)">

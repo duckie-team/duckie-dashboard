@@ -1,4 +1,5 @@
 import { CreateProblemObject } from "./problem";
+import { UserObject } from "./user";
 
 export type CreateExamObject = {
     title: string;
@@ -37,4 +38,6 @@ export type ExamObject = {
         id: number;
         name: string;
     }[];
+    canRetry?: boolean;
+    user?: UserObject;
 };
