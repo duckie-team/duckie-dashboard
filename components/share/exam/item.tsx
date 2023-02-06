@@ -7,6 +7,7 @@ const Divver = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
+    cursor: pointer;
 `;
 
 const Thumbnail = styled.img`
@@ -38,10 +39,3 @@ export function ExamItem({ exam }: { exam: ExamObject }) {
         </Divver>
     );
 }
-
-export const ExamItemGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20%, auto));
-    column-gap: 12px;
-    row-gap: 20px;
-`;

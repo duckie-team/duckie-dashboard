@@ -11,10 +11,17 @@ import styled from "styled-components";
 import { ExamDomainHeader } from "../../../../components/pages/dashboard/domain/exam/header";
 import { DashboardHeader } from "../../../../components/pages/dashboard/header";
 import { IndexFooter } from "../../../../components/pages/index/index";
-import { ExamItem, ExamItemGrid } from "../../../../components/share/exam/item";
+import { ExamItem } from "../../../../components/share/exam/item";
 import { useUser } from "../../../../hook/useUser";
 import { examClient } from "../../../../lib/client/client";
 import { ExamAPI } from "../../../../lib/client/endpoints";
+
+const ExamItemGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20%, auto));
+    column-gap: 12px;
+    row-gap: 20px;
+`;
 
 const Center = styled.div`
     width: 100%;
