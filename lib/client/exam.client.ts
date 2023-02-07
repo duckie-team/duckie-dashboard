@@ -170,4 +170,21 @@ export class ExamAPIClient {
     public readonly file = {
         post: this.requestBuilder(ExamAPI.Files.PostFile),
     };
+
+    public readonly recommendations = {
+        get: this.requestBuilder(ExamAPI.Recommendations.GetRecommendations),
+        post: this.requestBuilder(ExamAPI.Recommendations.PostRecommendations),
+        patch: this.requestBuilder(
+            ExamAPI.Recommendations.PatchRecommendations
+        ),
+        delete: this.requestBuilder(
+            ExamAPI.Recommendations.DeleteRecommendations
+        ),
+    };
+
+    public readonly search = {
+        exams: this.requestBuilder(ExamAPI.Search.SearchExams),
+        users: this.requestBuilder(ExamAPI.Search.SearchUsers),
+        tags: this.requestBuilder(ExamAPI.Search.SearchTags),
+    };
 }

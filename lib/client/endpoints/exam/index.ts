@@ -10,3 +10,5 @@ export * as Tags from "./tags";
 export * as Terms from "./terms";
 export * as Users from "./user";
 export * as Files from "./file";
+export * as Recommendations from "./recommendation";
+export * as Search from "./search";

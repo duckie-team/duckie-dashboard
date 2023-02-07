@@ -11,7 +11,8 @@ import styled from "styled-components";
 import { ExamDomainHeader } from "../../../../components/pages/dashboard/domain/exam/header";
 import { DashboardHeader } from "../../../../components/pages/dashboard/header";
 import { IndexFooter } from "../../../../components/pages/index/index";
-import { ExamItem } from "../../../../components/share/exam/item";
+import { ExamItem } from "../../../../components/share/exam";
+import { ExamItemMedium } from "../../../../components/share/exam/medium";
 import { useUser } from "../../../../hook/useUser";
 import { examClient } from "../../../../lib/client/client";
 import { ExamAPI } from "../../../../lib/client/endpoints";
@@ -53,7 +54,7 @@ export default function Dashboard() {
                             //         subText={exam.description}
                             //     />
                             // </ItemsTable.Row>
-                            <ExamItem exam={exam} key={exam.id} />
+                            <ExamItem size="medium" exam={exam} key={exam.id} />
                         ))}
                         {/* </ItemsTable> */}
                     </ExamItemGrid>
