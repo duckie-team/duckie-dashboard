@@ -13,6 +13,7 @@ const Divver = styled.div<{ width: string }>`
 const Thumbnail = styled.img`
     width: 100%;
     border-radius: 8px;
+    aspect-ratio: 15/11;
 `;
 
 export function ExamItemSmall({

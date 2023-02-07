@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
     Flex,
     PageHead,
@@ -16,6 +17,7 @@ import {
 } from "opize-design-system";
 import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import { ExamDomainHeader } from "../../../../../components/pages/dashboard/domain/exam/header";
 import { RecommendationPreview } from "../../../../../components/pages/dashboard/domain/exam/recommendation/preview";
@@ -24,6 +26,7 @@ import { IndexFooter } from "../../../../../components/pages/index/index";
 import { ExamItem } from "../../../../../components/share/exam";
 import { examClient } from "../../../../../lib/client/client";
 import { ExamAPI } from "../../../../../lib/client/endpoints";
+import { APIResponseError } from "../../../../../lib/client/error";
 
 type Tag = {
     name: string;
@@ -131,8 +134,6 @@ function ExamsSelector({
                 });
 
                 setSearchResults(res.result);
-
-                console.log(res);
             } catch (err) {}
         },
         [page]
@@ -185,9 +186,38 @@ function ExamsSelector({
 }
 
 export default function Page() {
+    const router = useRouter();
     const [title, setTitle] = useState("");
     const [exams, setExams] = useState<Exams>([]);
     const [tag, setTag] = useState<Tag>();
+
+    const createRecommendation = async () => {
+        if (!title || exams.length === 0 || !tag) {
+            toast.info("항목들을 채워주세요");
+            return;
+        }
+
+        const data: ExamAPI.Recommendations.PostRecommendationsParameter = {
+            examIds: exams.map((exam) => exam.id),
+            tagId: tag?.id,
+            title: title,
+        };
+
+        try {
+            const res = await examClient.recommendations.post(data);
+            console.log(res);
+            router.push("/dashboard/domain/exam/recommendation");
+        } catch (err) {
+            if (err instanceof APIResponseError) {
+                toast.error(`요청이 거부되었어요. ${err.status}`);
+                toast.warn(err.body?.message);
+                console.error(err.body);
+            } else {
+                toast.error("서버에 연결할 수 없어요");
+                console.error(err);
+            }
+        }
+    };
 
     return (
         <>
@@ -214,7 +244,7 @@ export default function Page() {
                     </Flex.Column>
                 }
             />
-            <PageLayout panWidth="360px" panPosition="start">
+            <PageLayout panWidth="360px" panPosition="start" gap="20px">
                 <PageLayout.Pane>
                     <CreateRecommendationPreview
                         title={title}
@@ -223,18 +253,35 @@ export default function Page() {
                     />
                 </PageLayout.Pane>
                 <PageLayout.Content>
-                    <Flex.Column gap="8px">
-                        <H3>제목</H3>
-                        <TextField
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                            placeholder="쿠키 좀 구워봤어?"
-                        />
-                        <H3>태그</H3>
-                        <TagSelector tag={tag} setTag={setTag} />
-                        <H3>시험</H3>
+                    <Flex.Column gap="16px">
+                        <Flex.Column gap="8px">
+                            <H3>제목</H3>
+                            <TextField
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                                placeholder="쿠키 좀 구워봤어?"
+                            />
+                        </Flex.Column>
 
-                        <ExamsSelector exams={exams} setExams={setExams} />
+                        <Flex.Column gap="8px">
+                            <H3>태그</H3>
+                            <TagSelector tag={tag} setTag={setTag} />
+                        </Flex.Column>
+
+                        <Flex.Column gap="8px">
+                            <H3>시험</H3>
+                            <ExamsSelector exams={exams} setExams={setExams} />
+                        </Flex.Column>
+
+                        <Flex.Between>
+                            <Text> </Text>
+                            <Button
+                                variant="contained"
+                                onClick={createRecommendation}
+                            >
+                                추천 생성
+                            </Button>
+                        </Flex.Between>
                     </Flex.Column>
                 </PageLayout.Content>
             </PageLayout>

@@ -26,6 +26,7 @@ export type ExamObject = {
     answerRate: number;
     solvedCount: number;
     thumbnailUrl?: string;
+    status: "READY" | "PENDING" | "REJECTED";
     category: {
         name: string;
         id: number;
