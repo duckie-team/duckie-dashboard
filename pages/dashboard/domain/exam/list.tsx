@@ -14,8 +14,8 @@ import { IndexFooter } from "../../../../components/pages/index/index";
 import { ExamItem } from "../../../../components/share/exam";
 import { ExamItemMedium } from "../../../../components/share/exam/medium";
 import { useUser } from "../../../../hook/useUser";
-import { examClient } from "../../../../lib/client/client";
-import { ExamAPI } from "../../../../lib/client/endpoints";
+import { examClient } from "../../../../lib/client-old/client";
+import { ExamAPI } from "../../../../lib/client-old/endpoints";
 
 const ExamItemGrid = styled.div`
     display: grid;

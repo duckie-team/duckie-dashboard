@@ -14,9 +14,9 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import { examClient } from "../../../../../../../lib/client/client";
-import { ExamAPI } from "../../../../../../../lib/client/endpoints";
-import { APIResponseError } from "../../../../../../../lib/client/error";
+import { examClient } from "../../../../../../../lib/client-old/client";
+import { ExamAPI } from "../../../../../../../lib/client-old/endpoints";
+import { APIResponseError } from "../../../../../../../lib/client-old/error";
 import { ModalDiv } from "./share";
 
 const ImagePreview = styled.img``;

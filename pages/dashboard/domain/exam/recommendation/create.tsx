@@ -24,9 +24,9 @@ import { RecommendationPreview } from "../../../../../components/pages/dashboard
 import { CreateRecommendationPreview } from "../../../../../components/pages/dashboard/domain/exam/recommendation/preview/create";
 import { IndexFooter } from "../../../../../components/pages/index/index";
 import { ExamItem } from "../../../../../components/share/exam";
-import { examClient } from "../../../../../lib/client/client";
-import { ExamAPI } from "../../../../../lib/client/endpoints";
-import { APIResponseError } from "../../../../../lib/client/error";
+import { examClient } from "../../../../../lib/client-old/client";
+import { ExamAPI } from "../../../../../lib/client-old/endpoints";
+import { APIResponseError } from "../../../../../lib/client-old/error";
 
 type Tag = {
     name: string;

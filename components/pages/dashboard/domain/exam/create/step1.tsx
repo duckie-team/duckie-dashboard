@@ -14,8 +14,8 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { CreateExamContext } from "../../../../../../context/pages/dashboard/domain/exam/exam.context";
-import { examClient } from "../../../../../../lib/client/client";
-import { ExamAPI } from "../../../../../../lib/client/endpoints";
+import { examClient } from "../../../../../../lib/client-old/client";
+import { ExamAPI } from "../../../../../../lib/client-old/endpoints";
 
 type Step1Form = Pick<
     ExamAPI.Object.CreateExamObject,

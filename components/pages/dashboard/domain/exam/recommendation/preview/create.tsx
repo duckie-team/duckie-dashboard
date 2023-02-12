@@ -1,7 +1,7 @@
 import { cv, Flex, Span, Text } from "opize-design-system";
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { ExamAPI } from "../../../../../../../lib/client/endpoints";
+import { ExamAPI } from "../../../../../../../lib/client-old/endpoints";
 import { ExamItem, PlaceHolderExamItem } from "../../../../../../share/exam";
 
 const Wrapper = styled.div`

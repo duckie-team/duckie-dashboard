@@ -20,9 +20,9 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { CreateExamContext } from "../../../../../../context/pages/dashboard/domain/exam/exam.context";
 import { useUser } from "../../../../../../hook/useUser";
-import { examClient } from "../../../../../../lib/client/client";
-import { ExamAPI } from "../../../../../../lib/client/endpoints";
-import { APIResponseError } from "../../../../../../lib/client/error";
+import { examClient } from "../../../../../../lib/client-old/client";
+import { ExamAPI } from "../../../../../../lib/client-old/endpoints";
+import { APIResponseError } from "../../../../../../lib/client-old/error";
 
 type Step3Form = Pick<
     ExamAPI.Object.CreateExamObject,

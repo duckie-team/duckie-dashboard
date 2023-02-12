@@ -1,6 +1,6 @@
 import { cv, Flex, Text } from "opize-design-system";
 import styled from "styled-components";
-import { ExamObject } from "../../../lib/client/endpoints/exam/object";
+import { ExamObject } from "../../../lib/client-old/endpoints/exam/object";
 
 const Divver = styled.div<{ width: string }>`
     width: ${(props) => props.width};

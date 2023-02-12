@@ -24,8 +24,8 @@ import {
     CreateExamContextProvider,
 } from "../../../../../context/pages/dashboard/domain/exam/exam.context";
 import { useUser } from "../../../../../hook/useUser";
-import { examClient } from "../../../../../lib/client/client";
-import { ExamAPI } from "../../../../../lib/client/endpoints";
+import { examClient } from "../../../../../lib/client-old/client";
+import { ExamAPI } from "../../../../../lib/client-old/endpoints";
 
 function PageContent() {
     const {} = useUser({ roles: ["ADMIN"] });

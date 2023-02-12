@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { toast } from "react-toastify";
-import { examClient } from "../lib/client/client";
-import { APIResponseError } from "../lib/client/error";
+import { examClient } from "../lib/client-old/client";
+import { APIResponseError } from "../lib/client-old/error";
 
 let userId: number;
 if (typeof window !== undefined) {

@@ -5,7 +5,7 @@ import { ExamDomainHeader } from "../../../../components/pages/dashboard/domain/
 import { DashboardHeader } from "../../../../components/pages/dashboard/header";
 import { IndexFooter } from "../../../../components/pages/index";
 import { useUser } from "../../../../hook/useUser";
-import { examClient } from "../../../../lib/client/client";
+import { examClient } from "../../../../lib/client-old/client";
 
 export default function Dashboard() {
     const user = useUser({ roles: ["ADMIN"] });

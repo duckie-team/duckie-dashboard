@@ -7,9 +7,9 @@ import { KakaoLoginButton } from "../../components/pages/auth/kakaoLoginButton";
 import { IndexHeader } from "../../components/pages/index/index";
 import { IndexFooter } from "../../components/pages/index/index";
 import { DuckieIcon } from "../../components/share/duckieIcon";
-import { examClient } from "../../lib/client/client";
-import { ExamAPI } from "../../lib/client/endpoints";
-import { APIResponseError } from "../../lib/client/error";
+import { examClient } from "../../lib/client-old/client";
+import { ExamAPI } from "../../lib/client-old/endpoints";
+import { APIResponseError } from "../../lib/client-old/error";
 
 const Center = styled.div`
     width: 100%;
