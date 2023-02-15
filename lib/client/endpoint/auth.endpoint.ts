@@ -3,7 +3,7 @@ import { UserObject } from "../object/user.object";
 
 // POST /auth/kakao
 export type PostAuthKakaoParameter = {
-    accessToken: string;
+    code: string;
 };
 export type PostAuthKakaoResponse = {
     isNewUser: boolean;
@@ -16,7 +16,7 @@ export const PostAuthKakao: Endpoint<
 > = {
     method: "POST",
     path: "/auth/kakao",
-    bodyParams: ["accessToken"],
+    bodyParams: ["code"],
 };
 
 // GET /auth/token

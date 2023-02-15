@@ -1,18 +1,18 @@
 import { Endpoint } from "endpoint-client";
 
 // POST /terms/create
-export type PostTermsParameter = {
+export type PostTermParameter = {
     condition: string;
     version: string;
 };
-export type PostTermsResponse = {
+export type PostTermResponse = {
     condition: string;
     version: string;
     id: number;
     createdAt: string;
 };
-export const PostTerms: Endpoint<PostTermsParameter, PostTermsResponse> = {
-    path: () => `/terms`,
+export const PostTerm: Endpoint<PostTermParameter, PostTermResponse> = {
+    path: () => `/terms/create`,
     method: "POST",
     bodyParams: ["condition", "version"],
 };

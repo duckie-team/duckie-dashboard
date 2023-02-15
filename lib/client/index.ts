@@ -1,4 +1,5 @@
 import { ExamClient } from "./client";
+export * as ExamAPI from "./endpoint";
 
 export const examClient = new ExamClient({
     baseUrl: process.env.NEXT_PUBLIC_API_SERVER || "",
@@ -12,3 +13,7 @@ export const examClient = new ExamClient({
         "x-duckie-client": "web",
     },
 });
+
+if (typeof window !== "undefined") {
+    examClient.updateAuth(localStorage.getItem("duckieExamToken") || "");
+}

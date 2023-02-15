@@ -9,13 +9,15 @@ import {
     Text,
     TextArea,
     TextField,
+    useModal,
 } from "opize-design-system";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { CreateExamContext } from "../../../../../../context/pages/dashboard/domain/exam/exam.context";
-import { examClient } from "../../../../../../lib/client-old/client";
-import { ExamAPI } from "../../../../../../lib/client-old/endpoints";
+import { ExamAPI, examClient } from "../../../../../../lib/client";
+import { CreateCategoryModal } from "./step1/createCategory";
+import { MainTagSearch } from "./step1/mainTagSearch";
 
 type Step1Form = Pick<
     ExamAPI.Object.CreateExamObject,
@@ -24,12 +26,14 @@ type Step1Form = Pick<
 
 export function CreateStep1() {
     const { setData, data, setStep } = useContext(CreateExamContext);
+    const modal = useModal();
 
     const {
         register,
         handleSubmit,
         formState: { errors },
         watch,
+        setValue,
     } = useForm<Step1Form>({
         defaultValues: {
             title: data.title,
@@ -40,8 +44,9 @@ export function CreateStep1() {
         },
     });
 
-    const { data: categories } = useQuery(["categories"], () =>
-        examClient.categories.list({ withPopularTags: true })
+    const { data: categories, refetch: refetchCategories } = useQuery(
+        ["categories"],
+        () => examClient.categories.list({ withPopularTags: true })
     );
 
     const submit = async (form: Step1Form) => {
@@ -56,48 +61,37 @@ export function CreateStep1() {
         setStep(2);
     };
 
+    const createCategory = () => {
+        modal.open(<CreateCategoryModal refetch={refetchCategories} />);
+    };
+
     return (
         <form onSubmit={handleSubmit(submit)}>
             <Flex.Column gap="32px">
                 <Flex.Column gap="8px">
                     <Text weight="semibold">카테고리</Text>
                     {watch("categoryId")}
-                    <Select {...register("categoryId")}>
-                        {categories?.categories.map((category) => (
-                            <Select.Option
-                                value={`${category.id}`}
-                                key={category.id}
-                            >
-                                {category.name} ({category.id})
-                            </Select.Option>
-                        ))}
-                    </Select>
+
+                    <Flex.Between>
+                        <Select {...register("categoryId")}>
+                            {categories?.categories.map((category) => (
+                                <Select.Option
+                                    value={`${category.id}`}
+                                    key={category.id}
+                                >
+                                    {category.name} ({category.id})
+                                </Select.Option>
+                            ))}
+                        </Select>
+
+                        <Button onClick={createCategory}>카테고리 추가</Button>
+                    </Flex.Between>
                 </Flex.Column>
 
-                <Flex.Column gap="8px">
-                    <Text weight="semibold">시험 영역</Text>
-                    <Flex.Column>
-                        <Text color={cv.red1}>
-                            현재 검색 API가 개발중인 관계로, 직접 태그 아이디를
-                            입력해야 합니다.
-                        </Text>
-                        <TextField
-                            placeholder="메인 태그 아이디를 입력해주세요."
-                            {...register("mainTagId", {
-                                required: "필수 항목입니다.",
-                            })}
-                            error={errors.mainTagId?.message}
-                        />
-                        {/* <Flex.Row gap="8px">
-                            <TextField placeholder="시험 영역으로 설정할 태그를 검색해주세요." />
-                        </Flex.Row>
-                        <ItemsTable>
-                            <ItemsTable.Row>
-                                검색 결과가 이곳에 표시됩니다.
-                            </ItemsTable.Row>
-                        </ItemsTable> */}
-                    </Flex.Column>
-                </Flex.Column>
+                <MainTagSearch
+                    setValue={(value: number) => setValue("mainTagId", value)}
+                    value={watch("mainTagId")}
+                />
 
                 <Flex.Column gap="8px">
                     <Text weight="semibold">시험 제목</Text>
@@ -126,7 +120,7 @@ export function CreateStep1() {
                 <Flex.Column gap="8px">
                     <Text weight="semibold">설명</Text>
                     <TextArea
-                        placeholder="시험 제목을 입력해주세요."
+                        placeholder="시험 설명을 입력해주세요."
                         {...register("description", {
                             required: "필수 항목입니다.",
                         })}

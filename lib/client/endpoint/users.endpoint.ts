@@ -48,14 +48,22 @@ export const GetUserNicknameDuplicateCheck: Endpoint<
 };
 
 // GET /users/following
-export type GetUsersFollowingParameter = {
+export type GetUserFollowingParameter = {
     userId: string;
 };
-export type GetUsersFollowingResponse = {
+export type GetUserFollowingResponse = {
     userRecommendations: {
         category: CategoryObject;
         users: UserObject[];
     };
+};
+export const GetUserFollowing: Endpoint<
+    GetUserFollowingParameter,
+    GetUserFollowingResponse
+> = {
+    method: "GET",
+    path: "/user/following",
+    queryParams: ["userId"],
 };
 
 // GET /users/me/followers

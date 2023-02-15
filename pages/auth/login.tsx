@@ -7,7 +7,7 @@ import { KakaoLoginButton } from "../../components/pages/auth/kakaoLoginButton";
 import { IndexHeader } from "../../components/pages/index/index";
 import { IndexFooter } from "../../components/pages/index/index";
 import { DuckieIcon } from "../../components/share/duckieIcon";
-import { examClient } from "../../lib/client-old/client";
+import { examClient } from "../../lib/client";
 import { ExamAPI } from "../../lib/client-old/endpoints";
 import { APIResponseError } from "../../lib/client-old/error";
 
@@ -39,7 +39,7 @@ export default function Home() {
             const query = router.query;
             if (query.code) {
                 try {
-                    const res = await examClient.auth.kakaoLogin({
+                    const res = await examClient.auth.postKakao({
                         code: query.code as string,
                     });
                     router.push("/auth/login");

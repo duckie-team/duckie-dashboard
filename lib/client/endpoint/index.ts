@@ -13,3 +13,5 @@ export * as Search from "./search.endpoint";
 export * as Tags from "./tags.endpoint";
 export * as Terms from "./terms.endpoint";
 export * as Users from "./users.endpoint";
+export * as Hearts from "./hearts.endpoint";
+export * as Object from "../object";

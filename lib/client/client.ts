@@ -72,7 +72,7 @@ export class ExamClient extends EndpointClient {
     };
 
     readonly terms = {
-        post: this.endpointBuilder(ExamAPI.Terms.PostTerms),
+        post: this.endpointBuilder(ExamAPI.Terms.PostTerm),
         get: this.endpointBuilder(ExamAPI.Terms.GetTerm),
         getLastVersion: this.endpointBuilder(
             ExamAPI.Terms.GetTermsLatestVersion
@@ -85,7 +85,15 @@ export class ExamClient extends EndpointClient {
         nickNameDuplicateCheck: this.endpointBuilder(
             ExamAPI.Users.GetUserNicknameDuplicateCheck
         ),
+        getDefaultFollowing: this.endpointBuilder(
+            ExamAPI.Users.GetUserFollowing
+        ),
         getFollowing: this.endpointBuilder(ExamAPI.Users.GetUserMeFollowings),
         getFollowers: this.endpointBuilder(ExamAPI.Users.GetUserMeFollowers),
+    };
+
+    readonly hearts = {
+        post: this.endpointBuilder(ExamAPI.Hearts.PostHeart),
+        delete: this.endpointBuilder(ExamAPI.Hearts.DeleteHeart),
     };
 }
