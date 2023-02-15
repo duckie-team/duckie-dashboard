@@ -7,9 +7,9 @@ import { KakaoLoginButton } from "../../components/pages/auth/kakaoLoginButton";
 import { IndexHeader } from "../../components/pages/index/index";
 import { IndexFooter } from "../../components/pages/index/index";
 import { DuckieIcon } from "../../components/share/duckieIcon";
-import { examClient } from "../../lib/client/client";
-import { ExamAPI } from "../../lib/client/endpoints";
-import { APIResponseError } from "../../lib/client/error";
+import { examClient } from "../../lib/client";
+import { ExamAPI } from "../../lib/client-old/endpoints";
+import { APIResponseError } from "../../lib/client-old/error";
 
 const Center = styled.div`
     width: 100%;
@@ -39,14 +39,12 @@ export default function Home() {
             const query = router.query;
             if (query.code) {
                 try {
-                    const res = await examClient.auth.kakaoLogin({
+                    const res = await examClient.auth.postKakao({
                         code: query.code as string,
                     });
                     router.push("/auth/login");
                     localStorage.setItem("duckieExamToken", res.accessToken);
                     examClient.updateAuth(res.accessToken);
-
-                    toast.info("로그인에 성공했어요.");
                     router.push("/dashboard");
                 } catch (err) {
                     if (err instanceof APIResponseError) {
