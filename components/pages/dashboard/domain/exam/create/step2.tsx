@@ -10,7 +10,7 @@ import { X } from "phosphor-react";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { CreateExamContext } from "../../../../../../context/pages/dashboard/domain/exam/exam.context";
-import { ExamAPI } from "../../../../../../lib/client-old/endpoints";
+import { ExamAPI } from "../../../../../../lib/client";
 import { CreateProblemModalStep1 } from "./step2/modalStep1";
 import { CreateProblemModalStep2 } from "./step2/modalStep2";
 import { CreateProblemModalStep3 } from "./step2/modalStep3";
@@ -94,7 +94,7 @@ export function CreateStep2() {
                 {problems?.map((problem, i) => (
                     <ItemsTable.Row key={i}>
                         <ItemsTable.Row.Text
-                            text={problem.question.text}
+                            text={problem.question?.text || ""}
                             subText={`정답: ${problem.correctAnswer}`}
                         />
                         <ItemsTable.Row.Buttons

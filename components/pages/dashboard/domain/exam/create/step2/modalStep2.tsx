@@ -1,3 +1,4 @@
+import { APIResponseError } from "endpoint-client";
 import {
     Button,
     FileField,
@@ -16,9 +17,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import { examClient } from "../../../../../../../lib/client-old/client";
-import { ExamAPI } from "../../../../../../../lib/client-old/endpoints";
-import { APIResponseError } from "../../../../../../../lib/client-old/error";
+import { examClient } from "../../../../../../../lib/client";
+import { ExamAPI } from "../../../../../../../lib/client";
 import { ModalDiv } from "./share";
 
 function CreateProblemModalStep2ShortAnswer({
@@ -47,8 +47,8 @@ function CreateProblemModalStep2Choices({
     setCorrectAnswer,
     correctAnswer,
 }: {
-    choices: ExamAPI.Object.ChoiceAnswerObject["choices"];
-    setChoices: (choices: ExamAPI.Object.ChoiceAnswerObject["choices"]) => void;
+    choices: ExamAPI.Object.ChoiceObject[];
+    setChoices: (choices: ExamAPI.Object.ChoiceObject[]) => void;
     correctAnswer?: string;
     setCorrectAnswer: (correctAnswer: string) => void;
 }) {
@@ -157,10 +157,8 @@ function CreateProblemModalStep2ImageChoices({
     setCorrectAnswer,
     correctAnswer,
 }: {
-    choices: ExamAPI.Object.ImageChoiceAnsWerObject["imageChoice"];
-    setChoices: (
-        choices: ExamAPI.Object.ImageChoiceAnsWerObject["imageChoice"]
-    ) => void;
+    choices: ExamAPI.Object.ChoiceObject[];
+    setChoices: (choices: ExamAPI.Object.ChoiceObject[]) => void;
     correctAnswer?: string;
     setCorrectAnswer: (correctAnswer: string) => void;
 }) {
@@ -203,7 +201,7 @@ function CreateProblemModalStep2ImageChoices({
         const buffer = await file?.arrayBuffer();
 
         try {
-            const res = await examClient.file.post({
+            const res = await examClient.files.post({
                 file: buffer,
                 type: "problem-question-image",
             });
@@ -316,11 +314,9 @@ export function CreateProblemModalStep2({
     const [type, setType] =
         useState<ExamAPI.Object.AnswerObject["type"]>("shortAnswer");
 
-    const [choices, setChoices] = useState<
-        ExamAPI.Object.ChoiceAnswerObject["choices"]
-    >([]);
+    const [choices, setChoices] = useState<ExamAPI.Object.ChoiceObject[]>([]);
     const [imageChoices, setImageChoices] = useState<
-        ExamAPI.Object.ImageChoiceAnsWerObject["imageChoice"]
+        ExamAPI.Object.ChoiceObject[]
     >([]);
 
     const submit = () => {
@@ -345,7 +341,7 @@ export function CreateProblemModalStep2({
         if (type === "imageChoice") {
             setAnswer({
                 type: "imageChoice",
-                imageChoice: imageChoices,
+                choices: imageChoices,
             });
         }
         move(2);

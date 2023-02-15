@@ -9,3 +9,4 @@ export type ProblemObject = {
     memo?: string;
     correctAnswer?: string;
 };
+export type CreateProblemObject = Omit<ProblemObject, "id">;
