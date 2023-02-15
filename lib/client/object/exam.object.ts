@@ -32,7 +32,7 @@ export type CreateExamObject = {
     thumbnailType: ExamObjectThumbnailType;
     mainTagId: number;
     categoryId: number;
-    subTagIds: number[];
+    subTagIds?: number[];
     certifyingStatement: string;
     buttonTitle: string;
     problems: ProblemObject[];

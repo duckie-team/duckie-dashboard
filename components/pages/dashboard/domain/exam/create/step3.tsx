@@ -20,8 +20,8 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { CreateExamContext } from "../../../../../../context/pages/dashboard/domain/exam/exam.context";
 import { useUser } from "../../../../../../hook/useUser";
-import { examClient } from "../../../../../../lib/client-old/client";
-import { ExamAPI } from "../../../../../../lib/client-old/endpoints";
+import { examClient } from "../../../../../../lib/client";
+import { ExamAPI } from "../../../../../../lib/client";
 import { APIResponseError } from "../../../../../../lib/client-old/error";
 
 type Step3Form = Pick<
@@ -92,7 +92,7 @@ export function CreateStep3() {
                 return;
             }
 
-            const res = await examClient.exams.thumbnail.post({
+            const res = await examClient.exams.postThumbnail({
                 title: data.title || "",
                 nickName: name,
                 category: category.name,
@@ -115,9 +115,12 @@ export function CreateStep3() {
 
     const uploadExam = async () => {
         try {
-            const res = await examClient.exams.post(
-                data as ExamAPI.Object.CreateExamObject
-            );
+            // TODO: ThumbnailType 선택 추가
+            const res = await examClient.exams.post({
+                ...(data as ExamAPI.Object.CreateExamObject),
+                thumbnailType: "text",
+                subTagIds: undefined,
+            });
             router.push("/dashboard/domain/exam/list");
         } catch (err) {
             if (err instanceof APIResponseError) {

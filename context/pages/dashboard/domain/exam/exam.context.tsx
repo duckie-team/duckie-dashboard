@@ -1,5 +1,5 @@
 import { createContext, useMemo, useState } from "react";
-import { ExamAPI } from "../../../../../lib/client-old/endpoints";
+import { ExamAPI } from "../../../../../lib/client";
 
 type Step = 1 | 2 | 3;
 
