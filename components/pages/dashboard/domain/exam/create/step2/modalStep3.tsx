@@ -12,7 +12,7 @@ import {
 } from "opize-design-system";
 import { useForm } from "react-hook-form";
 import { toast, useToast } from "react-toastify";
-import { ExamAPI } from "../../../../../../../lib/client-old/endpoints";
+import { ExamAPI } from "../../../../../../../lib/client";
 import { ModalDiv } from "./share";
 
 type CreateProblemModalStep3Form = {

@@ -1,6 +1,6 @@
 import { CategoryObject } from "./category.object";
 import { HeartObject } from "./heart.object";
-import { ProblemObject } from "./problem.object";
+import { CreateProblemObject, ProblemObject } from "./problem.object";
 import { TagObject } from "./tag.object";
 import { UserObject } from "./user.object";
 
@@ -35,6 +35,6 @@ export type CreateExamObject = {
     subTagIds?: number[];
     certifyingStatement: string;
     buttonTitle: string;
-    problems: ProblemObject[];
+    problems: CreateProblemObject[];
     status?: "READY" | "PENDING";
 };
