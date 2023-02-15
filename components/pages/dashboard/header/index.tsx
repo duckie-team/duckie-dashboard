@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { Button, Flex, Header } from "opize-design-system";
 import styled from "styled-components";
 import DuckieTextLogo from "../../../../assets/duckie_text_logo.png";
-import { useUser } from "../../../../hook/useUser";
 
 const LogoDiv = styled.div`
     height: 28px;
@@ -13,7 +12,6 @@ const LogoDiv = styled.div`
 type Memu = "index" | "domain";
 export function DashboardHeader({ now }: { now: Memu }) {
     const router = useRouter();
-    const { user } = useUser();
 
     return (
         <Header>

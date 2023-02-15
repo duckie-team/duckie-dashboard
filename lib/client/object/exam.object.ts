@@ -1,0 +1,40 @@
+import { CategoryObject } from "./category.object";
+import { HeartObject } from "./heart.object";
+import { ProblemObject } from "./problem.object";
+import { TagObject } from "./tag.object";
+import { UserObject } from "./user.object";
+
+export type ExamObjectThumbnailType = "text" | "image";
+export type ExamObjectExamType = "text" | "audio" | "video";
+export type ExamObject = {
+    id: number;
+    title: string;
+    description?: string;
+    thumbnailUrl: string;
+    thumbnailType?: ExamObjectThumbnailType;
+    type?: ExamObjectExamType;
+    buttonTitle?: string;
+    certifyingStatement?: string;
+    solvedCount?: number;
+    answerRate?: number;
+    user?: UserObject;
+    category?: CategoryObject;
+    mainTag?: TagObject;
+    subTags?: TagObject[];
+    status?: "READY" | "REJECTED" | "PENDING";
+    heart?: HeartObject;
+    heartCount?: number;
+};
+export type CreateExamObject = {
+    title: string;
+    description: string;
+    thumbnailUrl: string;
+    thumbnailType: ExamObjectThumbnailType;
+    mainTagId: number;
+    categoryId: number;
+    subTagIds?: number[];
+    certifyingStatement: string;
+    buttonTitle: string;
+    problems: ProblemObject[];
+    status?: "READY" | "PENDING";
+};

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button, SimpleHeader } from "opize-design-system";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import DuckieTextLogo from "../../../../assets/duckie_text_logo.png";
@@ -12,6 +13,11 @@ const LogoDiv = styled.div`
 
 export function IndexHeader() {
     const router = useRouter();
+    const [isLogin, setIsLogin] = useState(false);
+
+    useEffect(() => {
+        setIsLogin(!!localStorage.getItem("token"));
+    }, []);
 
     return (
         <>
@@ -37,9 +43,15 @@ export function IndexHeader() {
                         오픈소스
                     </SimpleHeader.Nav.Link>
                 </SimpleHeader.Nav>
-                <Button onClick={() => router.push("/auth/login")}>
-                    로그인
-                </Button>
+                {isLogin ? (
+                    <Link href={"/dashboard"} passHref legacyBehavior>
+                        <Button as="a">대시보드</Button>
+                    </Link>
+                ) : (
+                    <Button onClick={() => router.push("/auth/login")}>
+                        로그인
+                    </Button>
+                )}
             </SimpleHeader>
         </>
     );

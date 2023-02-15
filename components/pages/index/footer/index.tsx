@@ -25,7 +25,7 @@ const ODSA = styled.a`
 
 export function IndexFooter() {
     return (
-        <Flex.Center>
+        <Flex.Center style={{ marginTop: "32px" }}>
             <Flex.Column gap="8px">
                 <Flex.Center>
                     <Image src={DuckieTextLogo} alt="덕키 로고" height={28} />
