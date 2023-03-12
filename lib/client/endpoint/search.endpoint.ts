@@ -6,7 +6,7 @@ import { UserObject } from "../object/user.object";
 export type SearchExamsParameter = {
     query: string;
     page: number;
-    type: "EXAM";
+    type: "EXAMS";
 };
 export type SearchExamsResponse = {
     page: number;
@@ -25,7 +25,7 @@ export const SearchExams: Endpoint<SearchExamsParameter, SearchExamsResponse> =
 export type SearchUsersParameter = {
     query: string;
     page: number;
-    type: "USER";
+    type: "USERS";
 };
 export type SearchUsersResponse = {
     page: number;

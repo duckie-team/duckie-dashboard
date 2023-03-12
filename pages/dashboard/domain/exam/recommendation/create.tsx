@@ -129,7 +129,7 @@ function ExamsSelector({
                 const res = await examClient.search.exams({
                     page: page,
                     query: searchText,
-                    type: "EXAM",
+                    type: "EXAMS",
                 });
 
                 setSearchResults(res.result.exams);
