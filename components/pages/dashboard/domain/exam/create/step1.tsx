@@ -37,7 +37,6 @@ export function CreateStep1() {
     } = useForm<Step1Form>({
         defaultValues: {
             title: data.title,
-            categoryId: data.categoryId,
             certifyingStatement: data.certifyingStatement,
             description: data.description,
             mainTagId: data.mainTagId,
@@ -70,8 +69,6 @@ export function CreateStep1() {
             <Flex.Column gap="32px">
                 <Flex.Column gap="8px">
                     <Text weight="semibold">카테고리</Text>
-                    {watch("categoryId")}
-
                     <Flex.Between>
                         <Select {...register("categoryId")}>
                             {categories?.categories.map((category) => (
@@ -81,7 +78,7 @@ export function CreateStep1() {
                                 >
                                     {category.name} ({category.id})
                                 </Select.Option>
-                            ))}
+                            ))}{" "}
                         </Select>
 
                         <Button onClick={createCategory}>카테고리 추가</Button>

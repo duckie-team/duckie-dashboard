@@ -6,7 +6,7 @@ import { RecommendationPreview } from "../../../../../components/pages/dashboard
 import { IndexFooter } from "../../../../../components/pages/index";
 
 export default function Page() {
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
 
     return (
         <>

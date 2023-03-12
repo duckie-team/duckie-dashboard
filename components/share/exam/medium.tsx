@@ -1,4 +1,4 @@
-import { cv, Flex, Text } from "opize-design-system";
+import { cv, Flex, Text, Token } from "opize-design-system";
 import styled from "styled-components";
 import { ExamObject } from "../../../lib/client/object";
 
@@ -32,15 +32,18 @@ export function ExamItemMedium({
     return (
         <Divver width={width}>
             <Thumbnail src={exam.thumbnailUrl} />
-            <Flex.Row gap="4px">
-                <Profile src={exam.user?.profileImageUrl} />
-                <Flex.Column>
-                    <Text>{exam.title}</Text>
-                    <Text size="12px" lineHeight="1">
-                        {exam.user?.nickName || "(알 수 없음)"}
-                    </Text>
-                </Flex.Column>
-            </Flex.Row>
+            <Flex.Between>
+                <Flex.Row gap="4px">
+                    <Profile src={exam.user?.profileImageUrl} />
+                    <Flex.Column>
+                        <Text>{exam.title}</Text>
+                        <Text size="12px" lineHeight="1">
+                            {exam.user?.nickName || "(알 수 없음)"}
+                        </Text>
+                    </Flex.Column>
+                </Flex.Row>
+                <Token color="default">{exam.status}</Token>
+            </Flex.Between>
         </Divver>
     );
 }

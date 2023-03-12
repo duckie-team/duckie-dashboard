@@ -47,12 +47,6 @@ export default function Dashboard() {
                     <ExamItemGrid>
                         {/* <ItemsTable> */}
                         {exams?.map((exam) => (
-                            // <ItemsTable.Row key={exam.id}>
-                            //     <ItemsTable.Row.Text
-                            //         text={`${exam.id}. ${exam.title}`}
-                            //         subText={exam.description}
-                            //     />
-                            // </ItemsTable.Row>
                             <ExamItem size="medium" exam={exam} key={exam.id} />
                         ))}
                         {/* </ItemsTable> */}

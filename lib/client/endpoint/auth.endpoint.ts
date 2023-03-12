@@ -24,6 +24,7 @@ export type GetAuthTokenParameter = {};
 export type GetAuthTokenResponse = {
     userId: number;
     type: "user";
+    status: "READY" | "NEW" | "BANNED";
 };
 export const GetAuthToken: Endpoint<
     GetAuthTokenParameter,

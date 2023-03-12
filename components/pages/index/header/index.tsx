@@ -16,7 +16,9 @@ export function IndexHeader() {
     const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {
-        setIsLogin(!!localStorage.getItem("token"));
+        setIsLogin(
+            typeof window !== undefined && !!localStorage.getItem("token")
+        );
     }, []);
 
     return (
