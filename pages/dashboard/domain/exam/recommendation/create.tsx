@@ -1,3 +1,4 @@
+import { APIResponseError } from "endpoint-client";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -24,9 +25,7 @@ import { RecommendationPreview } from "../../../../../components/pages/dashboard
 import { CreateRecommendationPreview } from "../../../../../components/pages/dashboard/domain/exam/recommendation/preview/create";
 import { IndexFooter } from "../../../../../components/pages/index/index";
 import { ExamItem } from "../../../../../components/share/exam";
-import { examClient } from "../../../../../lib/client-old/client";
-import { ExamAPI } from "../../../../../lib/client-old/endpoints";
-import { APIResponseError } from "../../../../../lib/client-old/error";
+import { ExamAPI, examClient } from "../../../../../lib/client";
 
 type Tag = {
     name: string;
@@ -56,7 +55,7 @@ function TagSelector({
                     type: "TAGS",
                 });
 
-                setTags(res.result);
+                setTags(res.result.tags);
 
                 console.log(res);
             } catch (err) {}
@@ -133,7 +132,7 @@ function ExamsSelector({
                     type: "EXAM",
                 });
 
-                setSearchResults(res.result);
+                setSearchResults(res.result.exams);
             } catch (err) {}
         },
         [page]
@@ -197,7 +196,7 @@ export default function Page() {
             return;
         }
 
-        const data: ExamAPI.Recommendations.PostRecommendationsParameter = {
+        const data: ExamAPI.Recommendations.PostRecommendationParameter = {
             examIds: exams.map((exam) => exam.id),
             tagId: tag?.id,
             title: title,

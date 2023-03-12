@@ -31,7 +31,7 @@ export function MainTagSearch({
                     query: searchText,
                     type: "TAGS",
                 });
-                setResults(res.result);
+                setResults(res.result.tags);
             } catch (err) {}
         },
         [page]
@@ -54,6 +54,8 @@ export function MainTagSearch({
         );
     };
 
+    console.log(results);
+
     return (
         <Flex.Column gap="8px">
             <Flex.Between>
@@ -69,7 +71,7 @@ export function MainTagSearch({
                     />
                 </Flex.Row>
                 <ItemsTable>
-                    {results.length !== 0 ? (
+                    {results && results.length !== 0 ? (
                         results.map((e) => (
                             <ItemsTable.Row key={e.id}>
                                 <ItemsTable.Row.Text

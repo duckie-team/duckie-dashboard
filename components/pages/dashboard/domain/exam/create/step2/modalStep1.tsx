@@ -1,3 +1,4 @@
+import { APIResponseError } from "endpoint-client";
 import {
     Button,
     Divider,
@@ -14,9 +15,7 @@ import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import styled from "styled-components";
-import { examClient } from "../../../../../../../lib/client-old/client";
-import { ExamAPI } from "../../../../../../../lib/client-old/endpoints";
-import { APIResponseError } from "../../../../../../../lib/client-old/error";
+import { ExamAPI, examClient } from "../../../../../../../lib/client";
 import { ModalDiv } from "./share";
 
 const ImagePreview = styled.img``;
@@ -40,7 +39,7 @@ function TypeImage({ setFileUrl }: { setFileUrl: (url: string) => void }) {
         const buffer = await file?.arrayBuffer();
 
         try {
-            const res = await examClient.file.post({
+            const res = await examClient.files.post({
                 file: buffer,
                 type: "problem-question-image",
             });

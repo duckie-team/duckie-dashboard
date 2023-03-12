@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { DashboardHeader } from "../../components/pages/dashboard/header";
 import { IndexFooter } from "../../components/pages/index";
 import { useUser } from "../../hook/useUser";
-import { examClient } from "../../lib/client-old/client";
 
 const Center = styled.div`
     width: 100%;

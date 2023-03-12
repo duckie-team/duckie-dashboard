@@ -1,4 +1,4 @@
-import { ExamObject } from "../../../lib/client-old/endpoints/exam/object";
+import { ExamObject } from "../../../lib/client/object";
 import { ExamItemMedium, PlaceholderExamItemMedium } from "./medium";
 import { ExamItemSmall, PlaceholderExamItemSmall } from "./small";
 

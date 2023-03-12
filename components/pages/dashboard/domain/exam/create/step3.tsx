@@ -1,3 +1,4 @@
+import { APIResponseError } from "endpoint-client";
 import { useRouter } from "next/router";
 import {
     Box,
@@ -22,7 +23,6 @@ import { CreateExamContext } from "../../../../../../context/pages/dashboard/dom
 import { useUser } from "../../../../../../hook/useUser";
 import { examClient } from "../../../../../../lib/client";
 import { ExamAPI } from "../../../../../../lib/client";
-import { APIResponseError } from "../../../../../../lib/client-old/error";
 
 type Step3Form = Pick<
     ExamAPI.Object.CreateExamObject,

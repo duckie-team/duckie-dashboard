@@ -10,7 +10,9 @@ export type SearchExamsParameter = {
 };
 export type SearchExamsResponse = {
     page: number;
-    result: ExamObject[];
+    result: {
+        exams: ExamObject[];
+    };
 };
 export const SearchExams: Endpoint<SearchExamsParameter, SearchExamsResponse> =
     {
@@ -27,7 +29,9 @@ export type SearchUsersParameter = {
 };
 export type SearchUsersResponse = {
     page: number;
-    result: UserObject[];
+    result: {
+        users: UserObject[];
+    };
 };
 export const SearchUsers: Endpoint<SearchUsersParameter, SearchUsersResponse> =
     {
@@ -45,9 +49,11 @@ export type SearchTagsParameter = {
 export type SearchTagsResponse = {
     page: number;
     result: {
-        name: string;
-        id: number;
-    }[];
+        tags: {
+            name: string;
+            id: number;
+        }[];
+    };
 };
 export const SearchTags: Endpoint<SearchTagsParameter, SearchTagsResponse> = {
     method: "GET",

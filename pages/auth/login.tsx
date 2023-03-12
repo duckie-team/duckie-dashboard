@@ -1,3 +1,4 @@
+import { APIResponseError } from "endpoint-client";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -8,8 +9,6 @@ import { IndexHeader } from "../../components/pages/index/index";
 import { IndexFooter } from "../../components/pages/index/index";
 import { DuckieIcon } from "../../components/share/duckieIcon";
 import { examClient } from "../../lib/client";
-import { ExamAPI } from "../../lib/client-old/endpoints";
-import { APIResponseError } from "../../lib/client-old/error";
 
 const Center = styled.div`
     width: 100%;
